@@ -41,7 +41,7 @@ else
             ;;
         "Set a new message")
             echo "Enter your commit message:"
-            read commitMessage
+            read -r commitMessage
             break
             ;;
         "Exit")
