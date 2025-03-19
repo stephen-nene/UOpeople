@@ -11,16 +11,6 @@ check_command() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Function to handle messages (fallback to echo if cowsay is missing)
-show_message() {
-    local message="$1"
-    if check_command "cowsay"; then
-        cowsay -f "$random_cowsay_style" "$message"
-    else
-        echo "$message"
-    fi
-}
-
 # Function to prompt the user to install missing dependencies
 install_dependency() {
     local package_name=$1
@@ -28,25 +18,26 @@ install_dependency() {
         read -p "$package_name is not installed. Install it now? (y/n): " choice
         case "$choice" in
             y|Y) sudo apt install -y "$package_name" ;;
-            *) show_message "Skipping $package_name installation!" ;;
+            *) cowsay -f "$random_cowsay_style" "Skipping $package_name installation!" ;;
         esac
     fi
 }
 
 # Ensure required dependencies are installed
+install_dependency "cowsay"
 install_dependency "javac"
 install_dependency "java"
 
 # Check if a filename was provided
 if [ $# -eq 0 ]; then
-    show_message "Usage: $0 <filename.java>"
+    echo "Usage: $0 <filename.java>"
     exit 1
 fi
 
 # Get the filename and validate it
 filename="$1"
 if [[ ! "$filename" =~ \.java$ ]]; then
-    show_message "Wrong file type! Please provide a .java file."
+    cowsay -f "$random_cowsay_style" "Wrong file type! Please provide a .java file."
     exit 1
 fi
 
@@ -56,18 +47,18 @@ class_name=$(basename "$filename" .java)
 # Compile the Java file
 javac "$filename" 2> error.log
 if [ $? -ne 0 ]; then
-    show_message "Compilation failed. Check error.log."
+    cowsay -f "$random_cowsay_style" "Compilation failed. Check error.log."
     exit 1
 fi
 
-# Run the Java program in the background and get its PID
-java "$class_name" &
-java_pid=$!
+# Run the compiled Java program
+java "$class_name"
+exit_code=$?
 
-# Wait for the Java program (GUI) to finish
-wait $java_pid
+# Handle execution errors
+if [ $exit_code -ne 0 ]; then
+    cowsay -f "$random_cowsay_style" "Execution failed! Check your code."
+fi
 
-# Cleanup .class files after Java GUI closes
+# Cleanup
 rm -f "$class_name.class"
-
-show_message "Cleanup complete!"
