@@ -1,0 +1,57 @@
+EmployeeStreamDemo.java:13: error: cannot find symbol
+                List<Employee> employees = Arrays.asList(
+                     ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:14: error: cannot find symbol
+                                new Employee("Alice", 28, "HR", 50000),
+                                    ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:15: error: cannot find symbol
+                                new Employee("Bob", 35, "IT", 70000),
+                                    ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:16: error: cannot find symbol
+                                new Employee("Charlie", 32, "Finance", 65000),
+                                    ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:17: error: cannot find symbol
+                                new Employee("David", 25, "IT", 48000),
+                                    ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:18: error: cannot find symbol
+                                new Employee("Eve", 45, "HR", 78000),
+                                    ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:19: error: cannot find symbol
+                                new Employee("Frank", 38, "Finance", 73000));
+                                    ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:22: error: cannot find symbol
+                Function<Employee, String> nameDeptFunction = emp -> emp.getName() + " - " + emp.getDepartment();
+                         ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:35: error: cannot find symbol
+                                .mapToDouble(Employee::getSalary) // Extract salary
+                                             ^
+  symbol:   variable Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:42: error: cannot find symbol
+                List<Employee> filteredEmployees = employees.stream()
+                     ^
+  symbol:   class Employee
+  location: class EmployeeStreamDemo
+EmployeeStreamDemo.java:47: error: incompatible types: invalid method reference
+                filteredEmployees.forEach(System.out::println);
+                                          ^
+    reference to println is ambiguous
+      both method println(char[]) in PrintStream and method println(String) in PrintStream match
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+11 errors
